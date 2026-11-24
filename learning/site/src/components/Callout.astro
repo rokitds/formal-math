@@ -1,0 +1,39 @@
+---
+// A highlighted aside. kind="note" for tips, "caution" for things to be careful about.
+interface Props {
+  kind?: "note" | "caution";
+  title?: string;
+}
+const { kind = "note", title } = Astro.props;
+---
+<aside class={`callout ${kind}`}>
+  {title && <div class="title">{title}</div>}
+  <slot />
+</aside>
+
+<style>
+  .callout {
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left-width: 4px;
+  }
+  .note {
+    border-left-color: var(--accent);
+  }
+  .caution {
+    border-left-color: var(--caution);
+  }
+  .title {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  .callout :global(p:first-of-type) {
+    margin-top: 0;
+  }
+  .callout :global(p:last-child) {
+    margin-bottom: 0;
+  }
+</style>

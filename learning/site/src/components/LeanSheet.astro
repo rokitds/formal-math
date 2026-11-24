@@ -1,0 +1,61 @@
+---
+// A card for a whole exercise sheet: its title, and links to open it.
+import { readLean, sheetTitle, githubUrl, liveUrl } from "../lib/lean";
+
+interface Props {
+  /** Path under learning/lean/LeanLearning, e.g. "Week01/E01_Rewriting.lean". */
+  file: string;
+}
+
+const { file } = Astro.props;
+const src = readLean(file);
+const title = sheetTitle(src, file);
+const titleParts = title.split("`");
+const count = (src.match(/^theorem ex/gm) ?? []).length;
+---
+<div class="sheet">
+  <div>
+    <div class="title">{titleParts.map((part, i) => (i % 2 ? <code>{part}</code> : part))}</div>
+    <div class="meta">{count} exercises · <code>learning/lean/LeanLearning/{file}</code></div>
+  </div>
+  <div class="actions">
+    <a class="button" href={liveUrl(src)} target="_blank" rel="noopener">Open in browser</a>
+    <a href={githubUrl(file)} target="_blank" rel="noopener">View on GitHub</a>
+  </div>
+</div>
+
+<style>
+  .sheet {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    margin: 1rem 0;
+    background: var(--surface);
+  }
+  .title {
+    font-weight: 600;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+    overflow-wrap: anywhere;
+  }
+  .actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 0.95rem;
+  }
+  .button {
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+</style>

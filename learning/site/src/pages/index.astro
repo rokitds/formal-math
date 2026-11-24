@@ -1,0 +1,75 @@
+---
+import Base from "../layouts/Base.astro";
+import Callout from "../components/Callout.astro";
+
+const lessons = Object.values(import.meta.glob("./lessons/*.mdx", { eager: true })) as any[];
+lessons.sort((a, b) => a.frontmatter.week - b.frontmatter.week);
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const roadmap = [
+  { step: 1, title: "Setup and Lean basics", text: "Install Lean, learn to read the goal state, prove things about logic and sets." },
+  { step: 2, title: "Complexity refresher and polynomials", text: "Circuits, P vs NP, VP vs VNP, and polynomials in Mathlib." },
+  { step: 3, title: "Read and check the real statement", text: "Line by line through Statement.lean, compared with the paper." },
+  { step: 4, title: "Follow the proof, write your own", text: "Trace a lemma chain through the 73,000-line proof, then prove related results." },
+];
+---
+<Base title="Lean to VP ≠ VNP">
+  <h1>Learn Lean, all the way to a research proof</h1>
+  <p>
+    A course that starts from zero and ends with reading Anthropic's Lean formalization of
+    <a href="https://github.com/rokitds/formal-math/tree/main/vp-vnp">VP ≠ VNP</a>, a claimed
+    separation in algebraic complexity theory. Every exercise is a real Lean file, and each
+    week comes with an animation of the ideas.
+  </p>
+
+  <Callout kind="caution" title="About the VP ≠ VNP claim">
+    The proof was written by an AI model and, per its README, has not been checked by a human
+    mathematician. Lean checks that the proof proves the Lean statement. Nothing checks that the
+    statement means what the paper says. Part of this course is learning how to check that yourself.
+  </Callout>
+
+  <h2>Lessons</h2>
+  <ul class="lessons">
+    {lessons.map((l) => (
+      <li>
+        <a href={`${base}/lessons/${l.file.split("/").pop().replace(".mdx", "")}/`}>
+          Week {l.frontmatter.week}: {l.frontmatter.title}
+        </a>
+        <div class="summary">{l.frontmatter.summary}</div>
+      </li>
+    ))}
+  </ul>
+
+  <h2>Roadmap</h2>
+  <ol class="roadmap">
+    {roadmap.map((r) => (
+      <li>
+        <strong>{r.title}.</strong> {r.text}
+      </li>
+    ))}
+  </ol>
+</Base>
+
+<style>
+  .lessons {
+    list-style: none;
+    padding: 0;
+  }
+  .lessons li {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.75rem;
+  }
+  .lessons a {
+    font-weight: 600;
+  }
+  .summary {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .roadmap li {
+    margin-bottom: 0.5rem;
+  }
+</style>
