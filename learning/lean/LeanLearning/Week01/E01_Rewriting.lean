@@ -3,9 +3,9 @@ import Mathlib.Tactic.Ring
 /-!
 # Week 1, sheet 1: equalities, `rfl`, `rw` and `ring`
 
-Work in VS Code with the Lean 4 extension. Put the cursor after `by` and watch the
-**Lean Infoview** panel: it shows the *goal state*, meaning what you still have to prove (after `⊢`)
-and the facts you have (above it). Every tactic changes the goal state. When there are no goals
+Open this file in your editor (see `learning/SETUP.md` for VS Code, Doom Emacs and Emacs), put the
+cursor after `by`, and look at the *goal state*: the Infoview panel in VS Code, or `C-c C-i` in
+Emacs. It shows what you still have to prove (after `⊢`) and the facts you have (above it). Every tactic changes the goal state. When there are no goals
 left, the proof is done.
 
 Replace each `sorry` with a proof. A file with no `sorry` warnings and no errors is a solved sheet.
