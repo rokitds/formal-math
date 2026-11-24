@@ -1,0 +1,74 @@
+---
+layout: ../../layouts/Lesson.astro
+title: Proofs you can watch
+week: 1
+time: about 3 weeks at a few hours a week
+summary: Install Lean, learn to read the goal state, and prove your first facts about equations, logic and sets.
+---
+import Callout from "../../components/Callout.astro";
+import LeanExercise from "../../components/LeanExercise.astro";
+import LeanSheet from "../../components/LeanSheet.astro";
+import Scene from "../../components/Scene.astro";
+
+## The one idea for this week
+
+A Lean proof is a conversation. You type a step (a *tactic*), and Lean answers with what is
+left to prove: the *goal state*. Everything above the `⊢` is what you know; the line after it is
+what you must show. A proof is finished when Lean says **No goals**.
+
+Paper proofs hide the goal state in the author's head. Lean shows it after every step, which is
+why reading the goal state is the most important skill in this course.
+
+<Scene
+  name="GoalState"
+  source="goal_state.py"
+  caption="Proving s ∩ s = s, one tactic at a time. Watch the goal split in two and close."
+/>
+
+## Get set up
+
+Follow [SETUP.md](https://github.com/rokitds/formal-math/blob/main/learning/SETUP.md) to install
+Lean and the VS Code extension. If you want to start before installing anything, every sheet below
+has an **Open in browser** button that loads it into the official online editor.
+
+## Reading
+
+Work through these chapters of [*Mathematics in Lean*](https://leanprover-community.github.io/mathematics_in_lean/)
+alongside the sheets:
+
+- Chapter 2.1 and 2.2, *Calculating* and *Proving identities*, for sheet 1.
+- Chapter 3.1 to 3.5, *Logic*, for sheet 2.
+- Chapter 4.1, *Sets*, for sheet 3.
+
+## Sheet 1: equations
+
+<LeanSheet file="Week01/E01_Rewriting.lean" />
+
+You meet `rfl`, `rw` and `ring`. The last exercise is the first hint of what algebraic complexity
+is about: one polynomial, two formulas, different numbers of multiplications.
+
+<LeanExercise file="Week01/E01_Rewriting.lean" name="ex1_6" />
+
+## Sheet 2: logic
+
+<LeanSheet file="Week01/E02_Logic.lean" />
+
+Proofs of `→`, `∧`, `∨`, `¬`, `∀` and `∃`. The sheet opens with a table of which tactic to use
+for each. The last exercise has the exact shape of every lower bound in the VP ≠ VNP statement.
+
+<LeanExercise file="Week01/E02_Logic.lean" name="ex2_9" />
+
+## Sheet 3: sets
+
+<LeanSheet file="Week01/E03_Sets.lean" />
+
+In Mathlib a set is a predicate, so set proofs are logic proofs in disguise. The headline claim
+of the VP ≠ VNP project is a set statement, `VP F ⊂ VNP F`, and the last exercise is a toy
+version of its shape.
+
+<LeanExercise file="Week01/E03_Sets.lean" name="ex3_6" />
+
+<Callout title="How to hand in a sheet">
+Replace every `sorry`, check that VS Code shows no errors and no `sorry` warnings, then commit
+and push to your branch. Your feedback comes on the pull request.
+</Callout>

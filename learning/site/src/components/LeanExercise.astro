@@ -1,0 +1,62 @@
+---
+// An exercise, pulled by name from a real Lean sheet. Never paste Lean code into a lesson:
+// use this component, so the site shows exactly the code that `lake build` checks.
+import { Code } from "astro:components";
+import { readLean, extractTheorem, githubUrl, liveUrl } from "../lib/lean";
+
+interface Props {
+  /** Path under learning/lean/LeanLearning, e.g. "Week01/E03_Sets.lean". */
+  file: string;
+  /** The theorem's name, e.g. "ex3_6". */
+  name: string;
+}
+
+const { file, name } = Astro.props;
+const src = readLean(file);
+const code = extractTheorem(src, name, file);
+const label = name.replace(/^ex/, "Exercise ").replace("_", ".");
+---
+<section class="exercise">
+  <header>
+    <span class="tag">{label}</span>
+    <span class="actions">
+      <a href={liveUrl(src)} target="_blank" rel="noopener">Try in browser</a>
+      <a href={githubUrl(file)} target="_blank" rel="noopener">Sheet on GitHub</a>
+    </span>
+  </header>
+  <Code code={code} lang="lean4" themes={{ light: "github-light", dark: "github-dark" }} wrap />
+</section>
+
+<style>
+  .exercise {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .tag {
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .actions {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+  .exercise :global(pre) {
+    margin: 0;
+    padding: 0.9rem;
+    border-radius: 0;
+  }
+</style>

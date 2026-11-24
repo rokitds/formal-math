@@ -1,0 +1,58 @@
+---
+// A rendered ManimCE scene. Source lives in learning/scenes/<source>; the rendered video in
+// public/scenes/<name>.mp4. Never use a raw <video> tag in a lesson.
+import { existsSync } from "node:fs";
+import path from "node:path";
+
+interface Props {
+  /** The Scene class name, which is also the video file name, e.g. "GoalState". */
+  name: string;
+  /** The Python file under learning/scenes, e.g. "goal_state.py". */
+  source: string;
+  caption: string;
+}
+
+const { name, source, caption } = Astro.props;
+const videoFile = path.resolve(process.cwd(), "public/scenes", `${name}.mp4`);
+const sourceFile = path.resolve(process.cwd(), "../scenes", source);
+if (!existsSync(sourceFile)) throw new Error(`Scene source not found: learning/scenes/${source}`);
+const hasVideo = existsSync(videoFile);
+const src = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/scenes/${name}.mp4`;
+const repo = "https://github.com/rokitds/formal-math/blob/main/learning/scenes";
+---
+<figure class="scene">
+  {hasVideo ? (
+    <video src={`${src}#t=1`} controls preload="metadata" playsinline></video>
+  ) : (
+    <div class="missing">
+      Not rendered yet. Run <code>manim -qm {source} {name}</code> in <code>learning/scenes</code>
+      and copy the video to <code>learning/site/public/scenes/{name}.mp4</code>.
+    </div>
+  )}
+  <figcaption>
+    {caption} <a href={`${repo}/${source}`} target="_blank" rel="noopener">Scene source</a>
+  </figcaption>
+</figure>
+
+<style>
+  .scene {
+    margin: 1.5rem 0;
+  }
+  video {
+    width: 100%;
+    border-radius: 8px;
+    background: #000;
+    display: block;
+  }
+  .missing {
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    color: var(--muted);
+  }
+  figcaption {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+</style>

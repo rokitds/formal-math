@@ -1,0 +1,16 @@
+{
+  "name": "lean-learning-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check-lessons": "node scripts/check-lessons.mjs",
+    "dev": "astro dev",
+    "prebuild": "node scripts/check-lessons.mjs",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^8.1.6",
+    "astro": "^7.4.13"
+  }
+}

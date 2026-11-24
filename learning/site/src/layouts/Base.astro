@@ -1,0 +1,119 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = "Learn Lean 4 from zero to reading a research formalization: VP ≠ VNP." } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site">
+      <a class="brand" href={`${base}/`}>Lean to VP ≠ VNP</a>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site">
+      Exercises are real Lean files checked by <code>lake build</code>.{" "}
+      <a href="https://github.com/rokitds/formal-math/tree/main/learning">Source on GitHub</a>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #fbfaf7;
+    --text: #1d1d1f;
+    --muted: #5f6368;
+    --surface: #ffffff;
+    --border: #e2e0da;
+    --accent: #2f5fd0;
+    --on-accent: #ffffff;
+    --caution: #c26a00;
+    --code-bg: #f3f2ee;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141517;
+      --text: #e8e6e3;
+      --muted: #a0a4ab;
+      --surface: #1c1e21;
+      --border: #33363b;
+      --accent: #7ea2ff;
+      --on-accent: #0d1117;
+      --caution: #f0a24a;
+      --code-bg: #24272b;
+      color-scheme: dark;
+    }
+    :root:not([data-theme="light"]) .astro-code,
+    :root:not([data-theme="light"]) .astro-code span {
+      color: var(--shiki-dark) !important;
+      background-color: var(--shiki-dark-bg) !important;
+    }
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  main {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 1rem 16px 3rem;
+  }
+  header.site,
+  footer.site {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 1rem 16px;
+  }
+  header.site {
+    border-bottom: 1px solid var(--border);
+  }
+  footer.site {
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .brand {
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+  }
+  a {
+    color: var(--accent);
+  }
+  h1 {
+    line-height: 1.2;
+    font-size: 2rem;
+  }
+  h2 {
+    margin-top: 2.5rem;
+  }
+  code {
+    font-family: "JetBrains Mono", "DejaVu Sans Mono", ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  :not(pre) > code {
+    background: var(--code-bg);
+    padding: 0.1em 0.3em;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+  }
+  pre {
+    overflow-x: auto;
+  }
+</style>
