@@ -28,7 +28,7 @@ The lessons are published as a website, so the material can be reused for others
 
 1. Read the lesson page and the chapters it points to.
 2. Fill in the `sorry`s in that week's sheets, in `lean/LeanLearning/WeekNN/`.
-3. When VS Code shows no errors and no `sorry` warnings for a sheet, commit and push.
+3. When your editor shows no errors and no `sorry` warnings for a sheet, commit and push.
 4. Feedback comes on the pull request.
 
 Status: week 1 is ready.
