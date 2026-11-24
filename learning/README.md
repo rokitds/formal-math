@@ -12,6 +12,7 @@ The lessons are published as a website, so the material can be reused for others
 | [`scenes/`](scenes/) | ManimCE animations, one Python file per scene. |
 | [`site/`](site/) | The course website (Astro + MDX). Lessons pull exercises straight from `lean/` and videos from `scenes/`. |
 | [`SETUP.md`](SETUP.md) | How to install everything on your laptop. |
+| [`COURSE.md`](COURSE.md) | The goal, the learner, the plan and past decisions. Context for a tutor, human or AI. |
 | [`CLAUDE.md`](CLAUDE.md) | Rules for writing sheets, lessons and scenes, for people and AI agents alike. |
 
 ## The plan

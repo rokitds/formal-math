@@ -1,5 +1,7 @@
 # Rules for working in `learning/`
 
+For the goal, the learner, the plan and how to tutor, read @COURSE.md first.
+
 This folder is a Lean course: exercise sheets (`lean/`), ManimCE animations (`scenes/`) and a
 website (`site/`, Astro + MDX). These rules keep every lesson consistent no matter who, or which
 agent, writes it. `npm run build` in `site/` runs `scripts/check-lessons.mjs` first and fails on
